@@ -26,14 +26,14 @@ type Claims struct {
 // New create new jwt token signed using ECDSA with the P-384
 // curve and the SHA-384 hash function.
 func New(claims *Claims, privateKey, publicKey string) (string, error) {
-	es384, err := jwt.ES384.New(jwt.PEM{
+	ps384, err := jwt.PS384.New(jwt.PEM{
 		[]byte(privateKey), []byte(publicKey),
 	})
 	if err != nil {
 		return "", err
 	}
 
-	tokenBuf, err := es384.Encode(claims)
+	tokenBuf, err := ps384.Encode(claims)
 	if err != nil {
 		return "", err
 	}
